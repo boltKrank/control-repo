@@ -25,20 +25,20 @@
 # Good way to maintain our IP and central management and automation.
 
 class profile::spark::demo (
-  Boolean $hyper_v_role = false,
+  #Boolean $hyper_v_role = false,
   Boolean $iis_role = false,
   Boolean $windows_feature_telnet = false,
-  Boolean $ip_address = false,
+  #Boolean $ip_address = false,
   Boolean $dns_server = false,
   Boolean $reg_key = false,
   Boolean $app_install_7zip = false,
-  Boolean $reboot_demo = false,
+  #Boolean $reboot_demo = false,
 ){
 
-  if $hyper_v_role {
+  #if $hyper_v_role {
 
 
-  }
+  #}
 
   #puppetlabs-iis
   if $iis_role {
@@ -88,10 +88,10 @@ class profile::spark::demo (
 
   # Demo over network ? (setup extra interface below)
   # New-NetLbfoTeam -Name vTeam -TeamMembers "Ethernet1","Ethernet2" -TeamingMode SwitchIndependent -LoadBalancingAlgorithm Dynamic
-  if $ip_address {
+  #if $ip_address {
 
 
-  }
+  #}
 
 
   if $dns_server {
@@ -136,7 +136,7 @@ class profile::spark::demo (
   # Reboot device and wait for recovery
   # Add a new line to the text file with the time
   #mod 'puppetlabs-reboot', '4.0.2'
-  if $reboot_demo {
+  #if $reboot_demo {
     #use reboot plan
-  }
+  #}
 }
