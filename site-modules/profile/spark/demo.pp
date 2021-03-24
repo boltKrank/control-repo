@@ -39,16 +39,53 @@ class profile::spark::demo (
 
   }
 
-
+  #puppetlabs-iis
   if $iis_role {
 
+    $iis_features = ['Web-WebServer','Web-Scripting-Tools']
+
+    iis_feature { $iis_features:
+      ensure => 'present',
+    }
+
+    # Delete the default website to prevent a port binding conflict.
+    iis_site {'Default Web Site':
+      ensure  => absent,
+      require => Iis_feature['Web-WebServer'],
+    }
+
+    iis_site { 'minimal':
+      ensure          => 'started',
+      physicalpath    => 'c:\\inetpub\\minimal',
+      applicationpool => 'DefaultAppPool',
+      require         => [
+        File['minimal'],
+        Iis_site['Default Web Site']
+      ],
+    }
+
+    file { 'minimal':
+      ensure => 'directory',
+      path   => 'c:\\inetpub\\minimal',
+    }
+
+    file { 'c:/inetpub/minimal/index.html':
+      ensure  => 'file',
+      content => 'HELLO',
+    }
+
   }
 
+  #puppetlabs-windowsfeature
   if $windows_feature_telnet {
 
-
+    windowsfeature { 'Telnet-Client':
+    ensure                 => present,
+    installmanagementtools => true,
+    }
   }
 
+  # Demo over network ?
   if $ip_address {
 
 
@@ -60,17 +97,33 @@ class profile::spark::demo (
 
   }
 
-
+  #mod 'puppetlabs-registry', '4.0.0'
   if $reg_key {
-
+    registry_value { 'HKLM\System\CurrentControlSet\Services\Puppet\MyNameIs':
+    ensure => present,
+    type   => string,
+    data   => 'My name is Simon',
+}
 
   }
 
+  # Chocolatey ?
   if $app_install_7zip {
 
+    #package{'7zip':
+    #  ensure    => latest,
+    #  provider  => 'chocolatey',
+    #}
+
+  package{'7zip':
+    ensure => installed,
+    source => 'https://www.7-zip.org/a/7z1900-x64.msi',
+  }
+
 
   }
 
+  #mod 'puppetlabs-reboot', '4.0.2'
   if $reboot_demo {
 
 

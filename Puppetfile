@@ -3,6 +3,11 @@ forge 'https://forge.puppet.com'
 # Modules from the Puppet Forge
 # Versions should be updated to be the latest at the time you start
 mod 'puppetlabs-comply', '1.0.1'
+mod 'puppetlabs-iis', '8.0.0'
+mod 'puppet-windowsfeature', '3.2.2'
+mod 'puppetlabs-registry', '4.0.0'
+mod 'puppetlabs-reboot', '4.0.2'
+mod 'puppetlabs-pwshlib', '0.8.0'
 
 
 
