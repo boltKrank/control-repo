@@ -5,7 +5,8 @@
 # Install a Windows Role – Maybe HyperV or IIS?
 # Install a Windows Feature – Also something simple, but unrelated – maybe Telnet Server?
 # Configure something network related (say – static IP address, or DNS servers)
-# Add a custom registry key – I don’t mind if this is to a completely novel location with no effect e.g. HLKM\SOFTWARE\PUPPETDEMO\ThisDoesNothing
+# Add a custom registry key – I don’t mind if this is to a completely novel location with no effect 
+# e.g. HLKM\SOFTWARE\PUPPETDEMO\ThisDoesNothing
 # Install an application – doesn’t have to be fancy, 7Zip or other GNU is fine.
 # Demonstrate something which requires a reboot to complete, and continuing after a reboot. Even something simple like:
 # Create a text file
@@ -85,7 +86,8 @@ class profile::spark::demo (
     }
   }
 
-  # Demo over network ?
+  # Demo over network ? (setup extra interface below)
+  # New-NetLbfoTeam -Name vTeam -TeamMembers "Ethernet1","Ethernet2" -TeamingMode SwitchIndependent -LoadBalancingAlgorithm Dynamic
   if $ip_address {
 
 
@@ -93,7 +95,12 @@ class profile::spark::demo (
 
 
   if $dns_server {
-
+    dsc_dnsserveraddress { 'Ethernet 3':
+      dsc_interfacealias => 'Ethernet 3',
+      dsc_addressfamily  => 'IPv4',
+      dsc_address        => ['10.140.0.14'],
+      dsc_validate       => true,
+    }
 
   }
 
@@ -123,12 +130,13 @@ class profile::spark::demo (
 
   }
 
+
+  # Create a text file
+  # Write the time to it
+  # Reboot device and wait for recovery
+  # Add a new line to the text file with the time
   #mod 'puppetlabs-reboot', '4.0.2'
   if $reboot_demo {
-
-
+    #use reboot plan
   }
-
-
-
 }
