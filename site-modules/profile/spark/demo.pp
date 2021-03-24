@@ -24,55 +24,54 @@
 # Good way to maintain our IP and central management and automation.
 
 class profile::spark::demo (
-  Boolean $hyperrole = false,
-  Boolean $iisRole = false,
-  Boolean $windowsFeatureTelnet = false,
-  Boolean $ipAddress = false,
-  Boolean $dnsServer = false,
-  Boolean $regKey = false,
-  Boolean $appInstall7zip = false,
-  Boolean $rebootDemo = false,
+  Boolean $hyper_v_role = false,
+  Boolean $iis_role = false,
+  Boolean $windows_feature_telnet = false,
+  Boolean $ip_address = false,
+  Boolean $dns_server = false,
+  Boolean $reg_key = false,
+  Boolean $app_install_7zip = false,
+  Boolean $reboot_demo = false,
 ){
 
-  if $hyper-v-role {
+  if $hyper_v_role {
 
 
   }
 
 
-  if $iisRole {
+  if $iis_role {
+
+  }
+
+  if $windows_feature_telnet {
 
 
   }
 
-  if $windowsFeatureTelnet {
-
-
-  }
-
-  if $ipAddress {
-
-
-  }
-
-
-  if $dnsServer {
+  if $ip_address {
 
 
   }
 
 
-  if $regKey {
+  if $dns_server {
 
 
   }
 
-  if $appInstall7zip {
+
+  if $reg_key {
 
 
   }
 
-  if $rebootDemo {
+  if $app_install_7zip {
+
+
+  }
+
+  if $reboot_demo {
 
 
   }
